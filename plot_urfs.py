@@ -7,14 +7,18 @@ def main():
     py.sign_in('rebecca_roisin', 'ay9gikxvge')
 
     # load simulated data
-    with open("women.pkl", "r") as f:
+    with open("women_bias.pkl", "r") as f:
         all_women = cPickle.load(f)
 
-    # plot histogram
-    fig = plt.figure()
-    ax = plt.subplot(111)
+    tot = 0
 
-    ax.hist(all_women, bins=np.arange(0, max(all_women)+1, 1), normed=True)
+    for b, women in all_women.iteritems():
+    
+        # plot histogram
+        fig = plt.figure()
+        ax = plt.subplot(111)
+
+        ax.hist(women, bins=np.arange(0, max(women)+1, 1), normed=True, histtype="step", label="bias: %s" % b)
     ax.set_xlabel("Number of Women")
     ax.set_ylabel("Frequency")
 
